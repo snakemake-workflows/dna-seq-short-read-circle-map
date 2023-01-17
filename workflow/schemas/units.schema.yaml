@@ -18,9 +18,6 @@ properties:
   fq2:
     type: string
     description: path to second FASTQ file (leave empty in case of single-end)
-  sra:
-    type: string
-    description: SRA id for automatic download of unit
   adapters:
     type: string
     description: cutadapt adapter trimming settings to use (see https://cutadapt.readthedocs.io)
@@ -28,3 +25,5 @@ properties:
 required:
   - sample_name
   - unit_name
+  - fq1
+  - fq2
