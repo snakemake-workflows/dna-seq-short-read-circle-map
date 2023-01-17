@@ -85,3 +85,17 @@ rule remove_iupac_codes:
     cache: "omit-software"
     shell:
         "(rbt vcf-fix-iupac-alleles < {input} | bcftools view -Oz > {output}) 2> {log}"
+
+
+rule tabix_known_variants:
+    input:
+        "resources/{prefix}.vcf.gz",
+    output:
+        "resources/{prefix}.vcf.gz.tbi",
+    log:
+        "logs/tabix/{prefix}.vcf.log",
+    cache: "omit-software"
+    params:
+        "-p vcf",
+    wrapper:
+        "v1.21.2/bio/tabix/index"
