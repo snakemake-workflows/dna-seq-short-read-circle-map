@@ -20,8 +20,3 @@ rule download_test_data:
         "logs/data/unknown_circle_reads_{read}.fastq"
     shell:
         "wget -O {output} https://raw.githubusercontent.com/iprada/Circle-Map/master/tutorial/unknown_circle_reads_{wildcards.read}.fastq 2> {log}"
-
-rule all:
-    input:
-        "results/circles/test_sample.tsv"
-    default_target: True
