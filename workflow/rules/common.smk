@@ -105,8 +105,7 @@ def get_mapping_input(wildcards):
             "results/trimmed/{sample}/{unit}_R1.fastq.gz",
             "results/trimmed/{sample}/{unit}_R2.fastq.gz",
         ]
-
-    else
+    else:
         return get_paired_read_files(wildcards)
 
 
