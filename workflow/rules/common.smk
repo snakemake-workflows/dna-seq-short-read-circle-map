@@ -52,13 +52,11 @@ if "groups" in config:
 else:
     group_annotation = pd.DataFrame({"group": groups}).set_index("group")
 
-units = (
-    pd.read_csv(
-        config["units"],
-        sep="\t",
-        dtype={"sample_name": str, "unit_name": str},
-        comment="#",
-    )
+units = pd.read_csv(
+    config["units"],
+    sep="\t",
+    dtype={"sample_name": str, "unit_name": str},
+    comment="#",
 )
 
 validate(units, schema="../schemas/units.schema.yaml")

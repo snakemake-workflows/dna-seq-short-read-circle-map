@@ -20,9 +20,7 @@ rule merge_unit_bams_per_sample:
     input:
         lambda wc: expand(
             "results/mapped/{{sample}}/{unit}.bam",
-            unit=units.loc[
-            units["sample_name" == wc.sample], "unit_name"
-            ].tolist(),
+            unit=units.loc[units["sample_name" == wc.sample], "unit_name"].tolist(),
         ),
     output:
         "results/merged/{sample}.bam",
