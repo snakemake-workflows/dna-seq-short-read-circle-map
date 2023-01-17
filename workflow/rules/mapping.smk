@@ -21,7 +21,7 @@ rule merge_unit_bams_per_sample:
         lambda wc: expand(
             "results/mapped/{{sample}}/{unit}.bam",
             unit=units.loc[
-            units["sample_name" == wildcards.sample], "unit_name"
+            units["sample_name" == wc.sample], "unit_name"
             ].tolist(),
         ),
     output:
