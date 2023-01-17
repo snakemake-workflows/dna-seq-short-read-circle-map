@@ -66,6 +66,15 @@ units = (
 validate(units, schema="../schemas/units.schema.yaml")
 
 
+## final workflow output
+
+def get_final_output(wildcards):
+    final_output = expand(
+        "results/circle-map/{sample}.circles.bed",
+        sample = samples["sample_name"]
+    )
+
+
 ## rule helper functions
 
 def get_adapters(wildcards):
