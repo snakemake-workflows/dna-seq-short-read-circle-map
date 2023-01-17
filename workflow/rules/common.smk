@@ -63,6 +63,8 @@ units = (
     .sort_index()
 )
 
+print(units)
+
 validate(units, schema="../schemas/units.schema.yaml")
 
 
