@@ -43,7 +43,7 @@ jobs:
       uses: snakemake/snakemake-github-action@v1.24.0
       with:
         directory: .test
-        snakefile: workflow/Snakefile
+        snakefile: .test/Snakefile
         args: "--use-conda --show-failed-logs --cores 3 --conda-cleanup-pkgs cache --all-temp"
 
     - name: Test report
