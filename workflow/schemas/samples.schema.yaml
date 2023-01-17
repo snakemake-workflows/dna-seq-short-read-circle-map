@@ -1,0 +1,28 @@
+$schema: "http://json-schema.org/draft-07/schema#"
+
+description: an entry in the sample sheet
+
+properties:
+  sample_name:
+    type: string
+    description: sample name/identifier (alphanumeric string, that may additionally contain '_' and '-')
+    pattern: "^[a-zA-Z_0-9-]+$"
+  alias:
+    type: string
+    description: sample name within the VCF/BCF files generated for a group (e.g. tumor, normal, etc.) (alphanumeric string, that may additionally contain '_' and '-')
+    pattern: "^[a-zA-Z_0-9-]+$"
+  group:
+    type: string
+    description: group of samples handled jointly (alphanumeric string, that may additionally contain '_' and '-')
+    pattern: "^[a-zA-Z_0-9-]+$"
+  platform:
+    type: string
+    enum:
+      - "ILLUMINA"
+    description: used sequencing platform
+
+required:
+  - sample_name
+  - alias
+  - group
+  - platform
