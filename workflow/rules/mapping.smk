@@ -59,8 +59,8 @@ ruleorder: apply_bqsr > bam_index
 
 rule apply_bqsr:
     input:
-        bam=get_recalibrate_quality_input,
-        bai=lambda w: get_recalibrate_quality_input(w, bai=True),
+        bam="results/merged/{sample}.bam",
+        bai="results/merged/{sample}.bai",
         ref=genome,
         dict=genome_dict,
         ref_fai=genome_fai,
