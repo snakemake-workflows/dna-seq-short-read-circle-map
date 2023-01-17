@@ -8,7 +8,7 @@ rule cutadapt_pe:
     log:
         "logs/cutadapt/{sample}-{unit}.log",
     params:
-        extra=config["params"]["cutadapt"],
+        extra=config.get("params", {}).get("cutadapt", ""),
         adapters=get_adapters,
     threads: 8
     wrapper:
