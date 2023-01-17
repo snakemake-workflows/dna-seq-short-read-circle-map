@@ -1,2 +1,2 @@
 sample_name	unit_name	fq1	fq2	adapters
-test_sample_unknown_circle_reads	unit_1	results/data/unknown_circle_reads_1.fastq	results/data/unknown_circle_reads_2.fastq		
+test_sample_unknown_circle_reads	unit_1	results/data/unknown_circle_reads_1.fastq	results/data/unknown_circle_reads_2.fastq	"-a AGAGCACACGTCTGAACTCCAGTCAC -g AGATCGGAAGAGCACACGT -A AGAGCACACGTCTGAACTCCAGTCAC -G AGATCGGAAGAGCACACGT"	
