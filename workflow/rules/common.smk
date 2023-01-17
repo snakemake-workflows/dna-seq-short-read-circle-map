@@ -68,23 +68,32 @@ validate(units, schema="../schemas/units.schema.yaml")
 
 ## final workflow output
 
+
 def get_final_output(wildcards):
     final_output = expand(
-        "results/circle-map/{sample}.circles.bed",
-        sample = samples["sample_name"]
+        "results/circle-map/{sample}.circles.bed", sample=samples["sample_name"]
     )
 
 
 ## rule helper functions
 
+
 def get_adapters(wildcards):
-    units.loc[units["sample_name"] == wildcards.sample].loc[units["unit_name"] == wildcards.unit].get("adapters", ""),
+    units.loc[units["sample_name"] == wildcards.sample].loc[
+        units["unit_name"] == wildcards.unit
+    ].get("adapters", ""),
+
 
 def get_paired_read_files(wildcards):
     return [
-        units.loc[units["sample_name"] == wildcards.sample].loc[units["unit_name"] == wildcards.unit, "fq1"],
-        units.loc[units["sample_name"] == wildcards.sample].loc[units["unit_name"] == wildcards.unit, "fq2"],
+        units.loc[units["sample_name"] == wildcards.sample].loc[
+            units["unit_name"] == wildcards.unit, "fq1"
+        ],
+        units.loc[units["sample_name"] == wildcards.sample].loc[
+            units["unit_name"] == wildcards.unit, "fq2"
+        ],
     ]
+
 
 def get_bwa_extra(wildcards):
     """
@@ -98,6 +107,7 @@ def get_bwa_extra(wildcards):
 
 ## rule input functions
 
+
 def get_mapping_input(wildcards):
     adapters = get_adapters(wildcards)
     if adapters:
@@ -107,5 +117,3 @@ def get_mapping_input(wildcards):
         ]
     else:
         return get_paired_read_files(wildcards)
-
-
