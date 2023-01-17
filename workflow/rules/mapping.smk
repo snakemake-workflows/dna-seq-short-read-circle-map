@@ -24,7 +24,7 @@ rule merge_unit_bams_per_sample:
         ),
     output:
         "results/merged/{sample}.bam",
-    logs:
+    log:
         "logs/merged/{sample}.bam",
     threads: 8
     wrapper:
