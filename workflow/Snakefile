@@ -6,7 +6,11 @@
 configfile: "config/config.yaml"
 
 include: "rules/common.smk"
+include: "rules/utils.smk"
 include: "rules/ref.smk"
+include: "rules/trimming.smk"
+include: "rules/mapping.smk"
+include: "rules/circle_map.smk"
 
 rule all:
     input:

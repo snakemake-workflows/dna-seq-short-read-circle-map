@@ -2,6 +2,8 @@ import yaml
 import pandas as pd
 from snakemake.utils import validate
 
+## Loading of configuration and sample files
+
 validate(config, schema="../schemas/config.schema.yaml")
 
 samples = (
@@ -62,3 +64,40 @@ units = (
 )
 
 validate(units, schema="../schemas/units.schema.yaml")
+
+
+## rule helper functions
+
+def get_adapters(wildcards):
+    units.loc[units["sample_name"] == wildcards.sample].loc[units["unit_name"] == wildcards.unit].get("adapters", ""),
+
+def get_paired_read_files(wildcards):
+    return [
+        units.loc[units["sample_name"] == wildcards.sample].loc[units["unit_name"] == wildcards.unit, "fq1"],
+        units.loc[units["sample_name"] == wildcards.sample].loc[units["unit_name"] == wildcards.unit, "fq2"],
+    ]
+
+def get_bwa_extra(wildcards):
+    """
+    Denote sample name and platform in read group.
+    Set -q option for independent mapping qualities for split reads (Circle-Map uses this).
+    """
+    return r"-q -R '@RG\tID:{sample}\tSM:{sample}\tPL:{platform}'".format(
+        sample=wildcards.sample, platform=samples.loc[wildcards.sample, "platform"]
+    )
+
+
+## rule input functions
+
+def get_mapping_input(wildcards):
+    adapters = get_adapters(wildcards)
+    if adapters:
+        return [
+            "results/trimmed/{sample}/{unit}_R1.fastq.gz",
+            "results/trimmed/{sample}/{unit}_R2.fastq.gz",
+        ]
+
+    else
+        return get_paired_read_files(wildcards)
+
+
