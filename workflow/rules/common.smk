@@ -59,8 +59,6 @@ units = (
         dtype={"sample_name": str, "unit_name": str},
         comment="#",
     )
-    .set_index(["sample_name", "unit_name"], drop=False)
-    .sort_index()
 )
 
 print(units)
