@@ -12,9 +12,12 @@ module test_circle_map_workflow:
 # use all rules from the main workflow
 use rule * from test_circle_map_workflow
 
+rule testing_all:
+    input:
+        test_circle_map_workflow.get_final_output,
+    default_target: True
 
 # add rules for testing setup
-
 
 rule download_test_data:
     output:
