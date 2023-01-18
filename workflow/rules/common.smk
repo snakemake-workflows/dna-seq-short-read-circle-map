@@ -84,12 +84,12 @@ def get_adapters(wildcards):
 
 def get_paired_read_files(wildcards):
     return [
-        units.loc[units["sample_name"] == wildcards.sample].loc[
-            units["unit_name"] == wildcards.unit, "fq1"
-        ].squeeze(),
-        units.loc[units["sample_name"] == wildcards.sample].loc[
-            units["unit_name"] == wildcards.unit, "fq2"
-        ].squeeze(),
+        units.loc[units["sample_name"] == wildcards.sample]
+        .loc[units["unit_name"] == wildcards.unit, "fq1"]
+        .squeeze(),
+        units.loc[units["sample_name"] == wildcards.sample]
+        .loc[units["unit_name"] == wildcards.unit, "fq2"]
+        .squeeze(),
     ]
 
 
