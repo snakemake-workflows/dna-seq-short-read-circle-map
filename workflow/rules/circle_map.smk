@@ -24,6 +24,9 @@ rule samtools_sort_candidates:
         "v1.21.2/bio/samtools/sort"
 
 
+ruleorder: samtools_sort_candidates > bam_index
+
+
 rule circle_map_realign:
     input:
         full_coordinate_bam="results/recal/{sample}.coordinate_sort.bam",
