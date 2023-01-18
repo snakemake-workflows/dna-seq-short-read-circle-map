@@ -38,11 +38,13 @@ rule circle_map_realign:
         "logs/circle-map/{sample}.circles.bed",
     conda:
         "../envs/circle_map.yaml"
+    threads: 4
     shell:
         "Circle-Map Realign "
         " -i {input.candidates_bam} "
         " -qbam {input.full_queryname_bam} "
         " -sbam {input.full_coordinate_bam} "
         " -fasta {input.fasta} "
+        " -t {threads}"
         " -o {output} "
         " 2> {log} "
