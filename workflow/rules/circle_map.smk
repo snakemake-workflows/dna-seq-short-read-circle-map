@@ -27,8 +27,10 @@ rule samtools_sort_candidates:
 rule circle_map_realign:
     input:
         full_coordinate_bam="results/recal/{sample}.coordinate_sort.bam",
+        full_coordinate_bai="results/recal/{sample}.coordinate_sort.bai",
         full_queryname_bam="results/recal/{sample}.queryname_sort.bam",
         candidates_bam="results/candidate_reads/{sample}.circle_candidate_reads.coordinate_sort.bam",
+        candidates_bai="results/candidate_reads/{sample}.circle_candidate_reads.coordinate_sort.bai",
         fasta=genome,
     output:
         "results/circle-map/{sample}.circles.bed",
