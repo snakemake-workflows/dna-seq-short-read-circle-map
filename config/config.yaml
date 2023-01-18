@@ -16,3 +16,18 @@ ref:
   # parameters above, specify a specific chromosome below and uncomment the line.
   # This is usually only relevant for testing.
   # chromosome: 21
+
+# You can pass extra command line arguments to the following tools. However, it is
+# very unlikely that you will need this functionality. Usually, all tools should be
+# configured correctly for the purposes of this analysis out of the box.
+# 
+# Also note, that this section is NOT for specifying resources that a rule might
+# want to reserve. Please directly annotate the rules via the `resources:` directive
+# if you have to specify those (for example for a cluster / scheduler that needs them).
+# For details on resource specifications, see:
+# https://snakemake.readthedocs.io/en/latest/snakefiles/rules.html#resources
+params:
+  cutadapt: ""
+  gatk:
+    BaseRecalibrator: ""
+    applyBQSR: ""
