@@ -28,8 +28,11 @@ views:
     render-table:
       columns:
         chromosome:
+          display-mode: normal
         start:
+          display-mode: normal
         end:
+          display-mode: normal
         discordant_reads:
           plot:
             ticks:
