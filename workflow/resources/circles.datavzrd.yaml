@@ -1,4 +1,4 @@
-name: ?f"Extrachromosomal circular DNAs (eccDNAs) found by Circle-Map in sample: {wildcards.sample}."
+name: ?f"Extrachromosomal circular DNAs (eccDNAs) found by Circle-Map in sample '{wildcards.sample}'."
 
 default-view: circles
 
