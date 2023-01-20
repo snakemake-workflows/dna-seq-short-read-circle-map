@@ -19,17 +19,15 @@ views:
       """
     render-table:
       columns:
-        chromosome:
-          display-mode: normal
-        start:
-          display-mode: normal
-        end:
+        region:
           display-mode: normal
         discordant_reads:
+          precision: 0
           plot:
             ticks:
               scale: linear
         split_reads:
+          precision: 0
           plot:
             ticks:
               scale: linear
