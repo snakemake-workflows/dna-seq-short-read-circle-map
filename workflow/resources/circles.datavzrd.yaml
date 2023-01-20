@@ -6,16 +6,6 @@ datasets:
   circles:
     path: ?input.circles
     separator: "\t"
-    links:
-      heatmap:
-        column: accession
-        table-row: normalized_counts_heatmap/accession
-      stripchart:
-        column: accession
-        table-row: normalized_counts_stripchart/accession
-      gene:
-        column: accession
-        table-row: differential_expression/accession
 
 views:
   circle_table:
