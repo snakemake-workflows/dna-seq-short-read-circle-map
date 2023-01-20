@@ -56,7 +56,7 @@ rule circle_map_realign:
         # * substitution at first line: https://superuser.com/a/1239832
         # * triple \\\t escapes to be compatible across shells:
         #   https://stackoverflow.com/questions/1421478/how-do-i-use-a-new-line-replacement-in-a-bsd-sed#comment38075898_19883696
-        "   -e $'1s;^;chromosome\\\tstart\\\tend\\\tdiscordant_reads\\\tsplit_reads\\\tcircle_score\\\tmean_coverage\\\tstandard_deviation_coverage\\\tcov_increase_at_start\\\tcov_increase_at_end\\\tcovered_fraction\\\n;' "
+        "   -e $'1s;^;chromosome\\\tstart\\\tend\\\tdiscordant_reads\\\tsplit_reads\\\tcircle_score\\\tmean_coverage\\\tstandard_deviation_coverage\\\tcov_increase_at_start\\\tcov_increase_at_end\\\tuncovered_fraction\\\n;' "
         "   {output} "
         ") 2> {log} "
 
