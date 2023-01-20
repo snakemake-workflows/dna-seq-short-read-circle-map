@@ -43,11 +43,20 @@ rule circle_map_realign:
         "../envs/circle_map.yaml"
     threads: 4
     shell:
-        "Circle-Map Realign "
-        " -i {input.candidates_bam} "
-        " -qbam {input.full_queryname_bam} "
-        " -sbam {input.full_coordinate_bam} "
-        " -fasta {input.fasta} "
-        " -t {threads}"
-        " -o {output} "
-        " 2> {log} "
+        "( Circle-Map Realign "
+        "   -i {input.candidates_bam} "
+        "   -qbam {input.full_queryname_bam} "
+        "   -sbam {input.full_coordinate_bam} "
+        "   -fasta {input.fasta} "
+        "   -t {threads}"
+        "   -o {output}; "
+        # add a header line, using FreeBSD / MacOSX safe sed:
+        # * -i'' with empty backup extension: https://www.grymoire.com/Unix/Sed.html#uh-62h
+        " sed -i'' "
+        # * substitution at first line: https://superuser.com/a/1239832
+        # * triple \\\t escapes to be compatible across shells:
+        #   https://stackoverflow.com/questions/1421478/how-do-i-use-a-new-line-replacement-in-a-bsd-sed#comment38075898_19883696
+        "   -e $'1s;^;chromosome\\\tstart\\\tend\\\tdiscordant_reads\\\tsplit_reads\\\tcircle_score\\\tmean_coverage\\\tstandard_deviation_coverage\\\tcov_increase_at_start\\\tcov_increase_at_end\\\tcovered_fraction\\\n;' "
+        "   {output} "
+        ") 2> {log} "
+
