@@ -42,11 +42,13 @@ views:
                 - "#fdae61"
                 - "#abd9e9"
                 - "#2c7bb6"
+                - "#2c7bb6"
               domain:
                 - 10
                 - 40
                 - 60
                 - 200
+                - 100000
         mean_coverage:
           plot:
             ticks:
