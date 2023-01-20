@@ -36,14 +36,16 @@ views:
             heatmap:
               scale: linear
               range:
-                - "#d7191c"
-                - "#fdae61"
-                - "#abd9e9"
-                - "#2c7bb6"
-                - "#2c7bb6"
+                - "#af8dc3"
+                - "#e7d4e8"
+                - "white"
+                - "#d9f0d3"
+                - "#7fbf7b"
+                - "#7fbf7b"
               domain:
                 - 10
                 - 40
+                - 50
                 - 60
                 - 200
                 - 100000
@@ -60,9 +62,9 @@ views:
             heatmap:
               scale: linear
               range:
-                - "#ca0020"
+                - "#af8dc3"
                 - "white"
-                - "#0571b0"
+                - "#7fbf7b"
               domain:
                 - 0
                 - 0.33
@@ -72,9 +74,9 @@ views:
             heatmap:
               scale: linear
               range:
-                - "#ca0020"
+                - "#af8dc3"
                 - "white"
-                - "#0571b0"
+                - "#7fbf7b"
               domain:
                 - 0
                 - 0.33
@@ -84,9 +86,9 @@ views:
             heatmap:
               scale: linear
               range:
-                - "#0571b0"
+                - "#7fbf7b"
                 - "white"
-                - "#ca0020"
+                - "#af8dc3"
               domain:
                 - 0
                 - 0.5
