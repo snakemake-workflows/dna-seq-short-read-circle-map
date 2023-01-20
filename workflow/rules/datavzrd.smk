@@ -3,7 +3,7 @@ rule render_datavzrd_config:
         template=workflow.source_path("../resources/circles.datavzrd.yaml"),
         circles="results/circle-map/{sample}.circles.cleaned.tsv",
     output:
-        "resources/datavzrd/circle-map/{sample}.circles.cleaned.yaml",
+        "resources/datavzrd/circle-map/{sample}.circles.yaml",
     template_engine:
         "yte"
 
