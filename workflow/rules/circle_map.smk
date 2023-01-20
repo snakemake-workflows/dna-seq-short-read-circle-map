@@ -36,7 +36,7 @@ rule circle_map_realign:
         candidates_bai="results/candidate_reads/{sample}.circle_candidate_reads.coordinate_sort.bai",
         fasta=genome,
     output:
-        "results/circle-map/{sample}.circles.bed",
+        "results/circle-map/{sample}.circles.tsv",
     log:
         "logs/circle-map/{sample}.circles.log",
     conda:

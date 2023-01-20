@@ -13,6 +13,7 @@ include: "rules/ref.smk"
 include: "rules/trimming.smk"
 include: "rules/mapping.smk"
 include: "rules/circle_map.smk"
+include: "rules/datavzrd.smk"
 
 
 rule all:

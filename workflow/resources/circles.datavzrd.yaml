@@ -1,0 +1,98 @@
+name: ?f"Extrachromosomal circular DNAs (eccDNAs) found by Circle-Map in sample: {wildcards.sample}."
+
+default-view: circles
+
+datasets:
+  circles:
+    path: ?input.circles
+    separator: "\t"
+    links:
+      heatmap:
+        column: accession
+        table-row: normalized_counts_heatmap/accession
+      stripchart:
+        column: accession
+        table-row: normalized_counts_stripchart/accession
+      gene:
+        column: accession
+        table-row: differential_expression/accession
+
+views:
+  circle_table:
+    dataset: circles
+    page-size: 18
+    desc: |
+      ?f"Extrachromosomal circular DNAs (eccDNAs) found by Circle-Map in sample: {wildcards.sample}."
+      Detailed column descriptions are available in the Circle-Map wiki:
+      https://github.com/iprada/Circle-Map/wiki/Circle-Map-Realign-output-files
+    render-table:
+      columns:
+        chromosome:
+        start:
+        end:
+        discordant_reads:
+          plot:
+            ticks:
+              scale: linear
+        split_reads:
+          plot:
+            ticks:
+              scale: linear
+        circle_score:
+          plot:
+            heatmap:
+              scale: linear
+              range:
+                - "#d7191c"
+                - "#fdae61"
+                - "#abd9e9"
+                - "#2c7bb6"
+              domain:
+                - 10
+                - 40
+                - 60
+                - 200
+        mean_coverage:
+          plot:
+            ticks:
+              scale: linear
+        standard_deviation_coverage:
+          plot:
+            ticks:
+              scale: linear
+        cov_increase_at_start:
+          plot:
+            heatmap:
+              scale: linear
+              range:
+                - "#ca0020"
+                - "white"
+                - "#0571b0"
+              domain:
+                - 0
+                - 0.33
+                - 1
+        cov_increase_at_end:
+          plot:
+            heatmap:
+              scale: linear
+              range:
+                - "#ca0020"
+                - "white"
+                - "#0571b0"
+              domain:
+                - 0
+                - 0.33
+                - 1
+        uncovered_fraction:
+          plot:
+            heatmap:
+              scale: linear
+              range:
+                - "#0571b0"
+                - "white"
+                - "#ca0020"
+              domain:
+                - 0
+                - 0.5
+                - 1
