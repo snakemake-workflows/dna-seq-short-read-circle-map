@@ -67,7 +67,7 @@ validate(units, schema="../schemas/units.schema.yaml")
 
 def get_final_output(wildcards):
     final_output = expand(
-        "results/circle-map/{sample}.circles.bed", sample=samples["sample_name"]
+        "results/datavzrd/circles/{sample}"), sample=samples["sample_name"],
     )
 
     return final_output
