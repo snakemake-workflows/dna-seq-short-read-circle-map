@@ -1,6 +1,6 @@
 name: ?f"Extrachromosomal circular DNAs (eccDNAs) found by Circle-Map in sample '{wildcards.sample}'."
 
-default-view: circles
+default-view: circle_table
 
 datasets:
   circles:
