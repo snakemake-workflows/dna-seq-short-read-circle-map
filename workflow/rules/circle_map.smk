@@ -38,7 +38,7 @@ rule circle_map_realign:
     output:
         "results/circle-map/{sample}.circles.bed",
     log:
-        "logs/circle-map/{sample}.circles.bed",
+        "logs/circle-map/{sample}.circles.log",
     conda:
         "../envs/circle_map.yaml"
     threads: 4
