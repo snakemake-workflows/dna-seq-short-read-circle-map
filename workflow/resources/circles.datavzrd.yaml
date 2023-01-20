@@ -22,7 +22,7 @@ views:
     dataset: circles
     page-size: 18
     desc: |
-      ?f"Extrachromosomal circular DNAs (eccDNAs) found by Circle-Map in sample: {wildcards.sample}."
+      Extrachromosomal circular DNAs (eccDNAs) found by Circle-Map.
       Detailed column descriptions are available in the Circle-Map wiki:
       https://github.com/iprada/Circle-Map/wiki/Circle-Map-Realign-output-files
     render-table:
