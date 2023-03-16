@@ -67,7 +67,8 @@ validate(units, schema="../schemas/units.schema.yaml")
 
 def get_final_output(wildcards):
     final_output = expand(
-        "results/circle-map/{sample}.circles.bed", sample=samples["sample_name"]
+        "results/datavzrd/circles/{sample}",
+        sample=samples["sample_name"],
     )
 
     return final_output
@@ -82,6 +83,16 @@ def get_adapters(wildcards):
     ].get("adapters", ""),
 
 
+def get_bwa_extra(wildcards):
+    """
+    Denote sample name and platform in read group.
+    Set -q option for independent mapping qualities for split reads (Circle-Map uses this).
+    """
+    return r"-q -R '@RG\tID:{sample}\tSM:{sample}\tPL:{platform}'".format(
+        sample=wildcards.sample, platform=samples.loc[wildcards.sample, "platform"]
+    )
+
+
 def get_paired_read_files(wildcards):
     return [
         units.loc[units["sample_name"] == wildcards.sample]
@@ -91,16 +102,6 @@ def get_paired_read_files(wildcards):
         .loc[units["unit_name"] == wildcards.unit, "fq2"]
         .squeeze(),
     ]
-
-
-def get_bwa_extra(wildcards):
-    """
-    Denote sample name and platform in read group.
-    Set -q option for independent mapping qualities for split reads (Circle-Map uses this).
-    """
-    return r"-q -R '@RG\tID:{sample}\tSM:{sample}\tPL:{platform}'".format(
-        sample=wildcards.sample, platform=samples.loc[wildcards.sample, "platform"]
-    )
 
 
 ## rule input functions

@@ -38,7 +38,7 @@ rule circle_map_realign:
     output:
         "results/circle-map/{sample}.circles.bed",
     log:
-        "logs/circle-map/{sample}.circles.bed",
+        "logs/circle-map/{sample}.circles.log",
     conda:
         "../envs/circle_map.yaml"
     threads: 4
@@ -49,5 +49,18 @@ rule circle_map_realign:
         " -sbam {input.full_coordinate_bam} "
         " -fasta {input.fasta} "
         " -t {threads}"
-        " -o {output} "
-        " 2> {log} "
+        " -o {output}; "
+        "2> {log} "
+
+
+rule clean_circle_map_realign_output:
+    input:
+        "results/circle-map/{sample}.circles.bed",
+    output:
+        "results/circle-map/{sample}.circles.cleaned.tsv",
+    log:
+        "logs/circle-map/{sample}.circles.cleaned.log",
+    conda:
+        "../envs/pandas.yaml"
+    script:
+        "../scripts/clean_circle_map_realign_output.py"

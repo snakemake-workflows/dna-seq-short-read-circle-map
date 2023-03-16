@@ -1,0 +1,95 @@
+name: ?f"Extrachromosomal circular DNAs (eccDNAs) found by Circle-Map in sample '{wildcards.sample}'."
+
+default-view: circle_table
+
+datasets:
+  circles:
+    path: ?input.circles
+    separator: "\t"
+
+views:
+  circle_table:
+    dataset: circles
+    page-size: 18
+    desc: |
+      ?"""
+      Extrachromosomal circular DNAs (eccDNAs) found by Circle-Map in sample '{wildcards.sample}'.
+      Detailed column descriptions are available in the Circle-Map wiki:
+      https://github.com/iprada/Circle-Map/wiki/Circle-Map-Realign-output-files
+      """
+    render-table:
+      columns:
+        region:
+          display-mode: normal
+        discordant_reads:
+          precision: 0
+          plot:
+            ticks:
+              scale: linear
+        split_reads:
+          precision: 0
+          plot:
+            ticks:
+              scale: linear
+        circle_score:
+          plot:
+            heatmap:
+              scale: linear
+              range:
+                - "#af8dc3"
+                - "#e7d4e8"
+                - "white"
+                - "#d9f0d3"
+                - "#7fbf7b"
+                - "#7fbf7b"
+              domain:
+                - 10
+                - 40
+                - 50
+                - 60
+                - 200
+                - 100000
+        mean_coverage:
+          plot:
+            ticks:
+              scale: linear
+        standard_deviation_coverage:
+          plot:
+            ticks:
+              scale: linear
+        cov_increase_at_start:
+          plot:
+            heatmap:
+              scale: linear
+              range:
+                - "#af8dc3"
+                - "white"
+                - "#7fbf7b"
+              domain:
+                - 0
+                - 0.33
+                - 1
+        cov_increase_at_end:
+          plot:
+            heatmap:
+              scale: linear
+              range:
+                - "#af8dc3"
+                - "white"
+                - "#7fbf7b"
+              domain:
+                - 0
+                - 0.33
+                - 1
+        uncovered_fraction:
+          plot:
+            heatmap:
+              scale: linear
+              range:
+                - "#7fbf7b"
+                - "white"
+                - "#af8dc3"
+              domain:
+                - 0
+                - 0.5
+                - 1
