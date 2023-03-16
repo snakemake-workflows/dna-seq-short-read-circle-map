@@ -4,6 +4,8 @@ rule render_datavzrd_config:
         circles="results/circle-map/{sample}.circles.cleaned.tsv",
     output:
         "resources/datavzrd/circle-map/{sample}.circles.yaml",
+    log:
+        "logs/datavzrd/circle-map/{sample}.circles.rendering.log",
     template_engine:
         "yte"
 
