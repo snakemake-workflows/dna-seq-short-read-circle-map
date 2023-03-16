@@ -52,6 +52,7 @@ rule circle_map_realign:
         " -o {output}; "
         "2> {log} "
 
+
 rule clean_circle_map_realign_output:
     input:
         "results/circle-map/{sample}.circles.bed",

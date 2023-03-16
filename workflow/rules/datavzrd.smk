@@ -16,8 +16,6 @@ rule datavzrd:
         report(
             directory("results/datavzrd/circles/{sample}"),
             htmlindex="index.html",
-            # see https://snakemake.readthedocs.io/en/stable/snakefiles/reporting.html
-            # for additional options like caption, categories and labels
             category="extrachromosomal circular DNA",
             labels={"tool": "Circle-Map", "sample": "{sample}"},
             caption="../report/circle_map.rst",
