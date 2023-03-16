@@ -60,5 +60,7 @@ rule clean_circle_map_realign_output:
         "results/circle-map/{sample}.circles.cleaned.tsv",
     log:
         "logs/circle-map/{sample}.circles.cleaned.log",
+    conda:
+        "../envs/pandas.yaml"
     script:
         "../scripts/clean_circle_map_realign_output.py"
