@@ -2,6 +2,7 @@
 
 ## 1.0.0 (2023-03-16)
 
+Initial release, with working GitHub Actions CI testing, a basic working report and with Zenodo archiving set up.
 
 ### Bug Fixes
 
