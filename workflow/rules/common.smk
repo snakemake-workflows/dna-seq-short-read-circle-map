@@ -89,7 +89,8 @@ def get_bwa_extra(wildcards):
     Set -q option for independent mapping qualities for split reads (Circle-Map uses this).
     """
     return r"-q -R '@RG\tID:{sample}\tSM:{sample}\tPL:{platform}'".format(
-        sample=wildcards.sample, platform=samples.loc[wildcards.sample, "platform"]
+        sample=wildcards.sample,
+        platform=samples.loc[wildcards.sample, "platform"].upper(),
     )
 
 
