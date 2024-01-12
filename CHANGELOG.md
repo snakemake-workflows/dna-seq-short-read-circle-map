@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.1](https://www.github.com/snakemake-workflows/dna-seq-short-read-circle-map/compare/v1.1.0...v1.1.1) (2024-01-12)
+
+
+### Bug Fixes
+
+* adjust schema to allow lowercase platform spec ([#6](https://www.github.com/snakemake-workflows/dna-seq-short-read-circle-map/issues/6)) ([aecf851](https://www.github.com/snakemake-workflows/dna-seq-short-read-circle-map/commit/aecf851a0d11995a57079c6936dd50e6a5e02deb))
+
 ## [1.1.0](https://www.github.com/snakemake-workflows/dna-seq-short-read-circle-map/compare/v1.0.0...v1.1.0) (2024-01-11)
 
 
