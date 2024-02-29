@@ -5,7 +5,7 @@
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7788360.svg)](https://doi.org/10.5281/zenodo.7788360)
 
 
-A Snakemake workflow for calling extrachromosomal circular DNA in Illumina short-read sequencing data with Circle-Map.
+A Snakemake workflow for calling extrachromosomal circular DNA in Illumina short-read sequencing data with [Circle-Map](https://github.com/iprada/Circle-Map).
 
 
 ## Usage
