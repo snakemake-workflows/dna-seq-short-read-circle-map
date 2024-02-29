@@ -43,7 +43,7 @@ rule circle_map_realign:
         "../envs/circle_map.yaml"
     threads: 4
     resources:
-        mem_mb=lambda wc, threads: threads * 4000,
+        mem_mb=lambda wc, input: input.size_mb * 1.2,
     shell:
         "Circle-Map Realign "
         " -i {input.candidates_bam} "
