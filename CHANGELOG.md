@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://www.github.com/snakemake-workflows/dna-seq-short-read-circle-map/compare/v1.1.1...v1.2.0) (2024-02-29)
+
+
+### Features
+
+* add mem_mb resource annotation to bwa_mem ([#8](https://www.github.com/snakemake-workflows/dna-seq-short-read-circle-map/issues/8)) ([c9b6629](https://www.github.com/snakemake-workflows/dna-seq-short-read-circle-map/commit/c9b662984921a48857b58048a31435d62f44ae24))
+
 ### [1.1.1](https://www.github.com/snakemake-workflows/dna-seq-short-read-circle-map/compare/v1.1.0...v1.1.1) (2024-01-12)
 
 
