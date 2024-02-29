@@ -12,6 +12,8 @@ rule bwa_mem:
         sort_order="coordinate",  # Can be 'queryname' or 'coordinate'.
         sort_extra="",  # Extra args for samtools/picard.
     threads: 8
+    resources:
+        mem_mb=lambda wc, threads: threads * 4000
     wrapper:
         "v1.21.2/bio/bwa/mem"
 
