@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.2.2](https://www.github.com/snakemake-workflows/dna-seq-short-read-circle-map/compare/v1.2.1...v1.2.2) (2024-03-01)
+
+
+### Bug Fixes
+
+* increase mem_mb for circle_map_realign to `2.5 * input.size_mb` ([#14](https://www.github.com/snakemake-workflows/dna-seq-short-read-circle-map/issues/14)) ([1404fad](https://www.github.com/snakemake-workflows/dna-seq-short-read-circle-map/commit/1404fad9a751a3df6ee4e294885b7004d73850f0))
+
 ### [1.2.1](https://www.github.com/snakemake-workflows/dna-seq-short-read-circle-map/compare/v1.2.0...v1.2.1) (2024-03-01)
 
 
