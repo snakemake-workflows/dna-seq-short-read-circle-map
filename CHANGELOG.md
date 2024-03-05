@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.2.3](https://www.github.com/snakemake-workflows/dna-seq-short-read-circle-map/compare/v1.2.2...v1.2.3) (2024-03-05)
+
+
+### Bug Fixes
+
+* extend circle_score range/domain in datavzrd template to zero ([#16](https://www.github.com/snakemake-workflows/dna-seq-short-read-circle-map/issues/16)) ([3841997](https://www.github.com/snakemake-workflows/dna-seq-short-read-circle-map/commit/3841997af6365ae4894318a7d7e6a66989e28fb2))
+
 ### [1.2.2](https://www.github.com/snakemake-workflows/dna-seq-short-read-circle-map/compare/v1.2.1...v1.2.2) (2024-03-01)
 
 
