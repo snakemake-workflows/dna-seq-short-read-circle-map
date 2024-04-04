@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.2.4](https://www.github.com/snakemake-workflows/dna-seq-short-read-circle-map/compare/v1.2.3...v1.2.4) (2024-04-04)
+
+
+### Bug Fixes
+
+* extend upper domain limit for circle_score in circles.datavzrd.yaml ([#18](https://www.github.com/snakemake-workflows/dna-seq-short-read-circle-map/issues/18)) ([87d69a7](https://www.github.com/snakemake-workflows/dna-seq-short-read-circle-map/commit/87d69a7fe991b03162eff23caa604b9a7329beb6))
+
 ### [1.2.3](https://www.github.com/snakemake-workflows/dna-seq-short-read-circle-map/compare/v1.2.2...v1.2.3) (2024-03-05)
 
 
