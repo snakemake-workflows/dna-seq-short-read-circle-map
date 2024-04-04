@@ -50,7 +50,7 @@ views:
                 - 50
                 - 60
                 - 200
-                - 100000
+                - 10000000
         mean_coverage:
           plot:
             ticks:
