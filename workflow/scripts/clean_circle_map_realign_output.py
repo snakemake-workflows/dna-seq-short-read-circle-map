@@ -35,6 +35,13 @@ int_cols = [
 # turn int cols into int
 circles.loc[:, int_cols] = circles.loc[:, int_cols].round(0).applymap(lambda v: int(v) if not pd.isna(v) else pd.NA)
 
+# filter out low-quality circles, according to:
+# https://github.com/iprada/Circle-Map/wiki/Circle-Map-Realign-output-files
+circles = circles.loc[
+    circles["circle_score"] >= 50
+]
+
+
 circles["region"] = circles.agg(
     lambda row: f"{row['chromosome']}:{row['start']}-{row['end']}",
     axis='columns',

@@ -36,20 +36,16 @@ views:
             heatmap:
               scale: linear
               range:
-                - "#af8dc3"
-                - "#af8dc3"
                 - "#e7d4e8"
                 - "white"
                 - "#d9f0d3"
                 - "#7fbf7b"
                 - "#7fbf7b"
               domain:
-                - 0
-                - 10
-                - 40
                 - 50
-                - 60
+                - 100
                 - 200
+                - 300
                 - 10000000
         mean_coverage:
           plot:
