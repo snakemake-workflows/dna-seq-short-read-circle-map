@@ -38,7 +38,10 @@ circles.loc[:, int_cols] = circles.loc[:, int_cols].round(0).applymap(lambda v: 
 # filter out low-quality circles, according to:
 # https://github.com/iprada/Circle-Map/wiki/Circle-Map-Realign-output-files
 circles = circles.loc[
-    circles["circle_score"] >= 50
+    ( circles["circle_score"] >= 200 ) &
+    ( circles["discordant_reads"] > 0 ) &
+    ( circles["split_reads"] > 0 ) &
+    ( circles["uncovered_fraction"] < 1 )
 ]
 
 
@@ -47,7 +50,17 @@ circles["region"] = circles.agg(
     axis='columns',
 )
 
-circles.drop(
+circles["length"] = circles.agg(
+    # both start and end position are 0-based:
+    # https://github.com/iprada/Circle-Map/wiki/Circle-Map-Realign-output-files
+    lambda row: row['end'] - row['start'] + 1,
+    axis='columns',
+)
+
+circles.sort_values(
+    by=['chromosome', 'start', 'end'],
+    inplace=True
+).drop(
     labels=[
         "chromosome",
         "start",
