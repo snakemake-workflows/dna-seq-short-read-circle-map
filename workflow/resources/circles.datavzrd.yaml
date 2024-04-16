@@ -21,6 +21,11 @@ views:
       columns:
         region:
           display-mode: normal
+          link-to-url:
+            ensembl:
+              url: "https://www.ensembl.org/Homo_sapiens/Location/View?r={region}"
+        length:
+          display-mode: normal
         discordant_reads:
           precision: 0
           plot:
@@ -43,9 +48,9 @@ views:
                 - "#7fbf7b"
               domain:
                 - 50
-                - 100
                 - 200
                 - 300
+                - 800
                 - 10000000
         mean_coverage:
           plot:
