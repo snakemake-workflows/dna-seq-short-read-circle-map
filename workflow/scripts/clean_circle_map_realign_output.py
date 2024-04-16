@@ -60,7 +60,9 @@ circles["length"] = circles.agg(
 circles.sort_values(
     by=['chromosome', 'start', 'end'],
     inplace=True
-).drop(
+)
+
+circles.drop(
     labels=[
         "chromosome",
         "start",
