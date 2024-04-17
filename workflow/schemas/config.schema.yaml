@@ -37,7 +37,7 @@ properties:
         type: integer
       min_discordant_read_pairs:
         type: integer
-      max_uncovered fraction:
+      max_uncovered_fraction:
         type: number
       min_mean_coverage:
         type: number
@@ -49,7 +49,7 @@ properties:
       - min_circle_score
       - min_split_reads
       - min_discordant_read_pairs
-      - max_uncovered fraction
+      - max_uncovered_fraction
       - min_mean_coverage
       - min_circle_length
       - max_circle_length
