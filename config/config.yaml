@@ -31,3 +31,15 @@ params:
   gatk:
     BaseRecalibrator: ""
     applyBQSR: ""
+
+# These filters mostly correspond to the output columns of Circle-Map:
+# https://github.com/iprada/Circle-Map/wiki/Circle-Map-Realign-output-files
+# In addition, you can filter on the length of the circle.
+circle_filtering:
+  min_circle_score: 100
+  min_split_reads: 1
+  min_discordant_read_pairs: 1
+  max_uncovered fraction: 0.9
+  min_mean_coverage: 2.0
+  min_circle_length: 500
+  max_circle_length: 80000000
