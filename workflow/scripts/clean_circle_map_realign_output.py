@@ -38,7 +38,7 @@ circles.loc[:, int_cols] = circles.loc[:, int_cols].round(0).applymap(lambda v: 
 # filter out low-quality circles, according to:
 # https://github.com/iprada/Circle-Map/wiki/Circle-Map-Realign-output-files
 circles = circles.loc[
-    ( circles["circle_score"] >= 200 ) &
+    ( circles["circle_score"] >= 50 ) &
     ( circles["discordant_reads"] > 0 ) &
     ( circles["split_reads"] > 0 ) &
     ( circles["uncovered_fraction"] < 1 )
