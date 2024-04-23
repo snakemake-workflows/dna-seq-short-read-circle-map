@@ -17,6 +17,18 @@ ref:
   # This is usually only relevant for testing.
   # chromosome: 21
 
+# These filters mostly correspond to the output columns of Circle-Map:
+# https://github.com/iprada/Circle-Map/wiki/Circle-Map-Realign-output-files
+# In addition, you can filter on the length of the circle.
+circle_filtering:
+  min_circle_score: 100
+  min_split_reads: 0
+  min_discordant_read_pairs: 0
+  max_uncovered_fraction: 0.8
+  min_mean_coverage: 2.5
+  min_circle_length: 500
+  max_circle_length: 80000000
+
 # You can pass extra command line arguments to the following tools. However, it is
 # very unlikely that you will need this functionality. Usually, all tools should be
 # configured correctly for the purposes of this analysis out of the box.
@@ -32,14 +44,3 @@ params:
     BaseRecalibrator: ""
     applyBQSR: ""
 
-# These filters mostly correspond to the output columns of Circle-Map:
-# https://github.com/iprada/Circle-Map/wiki/Circle-Map-Realign-output-files
-# In addition, you can filter on the length of the circle.
-circle_filtering:
-  min_circle_score: 100
-  min_split_reads: 1
-  min_discordant_read_pairs: 1
-  max_uncovered_fraction: 0.9
-  min_mean_coverage: 2.0
-  min_circle_length: 500
-  max_circle_length: 80000000
