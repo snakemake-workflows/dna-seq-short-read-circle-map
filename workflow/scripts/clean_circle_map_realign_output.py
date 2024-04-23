@@ -35,9 +35,37 @@ int_cols = [
 # turn int cols into int
 circles.loc[:, int_cols] = circles.loc[:, int_cols].round(0).applymap(lambda v: int(v) if not pd.isna(v) else pd.NA)
 
+# filter out low-quality circles, according to:
+# https://github.com/iprada/Circle-Map/wiki/Circle-Map-Realign-output-files
+circles = circles.loc[
+    ( circles["circle_score"] >= snakemake.params["min_circle_score"] ) &
+    ( circles["discordant_reads"] > snakemake.params["min_discordant_read_pairs"] ) &
+    ( circles["split_reads"] > snakemake.params["min_split_reads"] ) &
+    ( circles["uncovered_fraction"] <= snakemake.params["max_uncovered_fraction"] ) &
+    ( circles["mean_coverage"] >= snakemake.params["min_mean_coverage"] )
+]
+
+
 circles["region"] = circles.agg(
     lambda row: f"{row['chromosome']}:{row['start']}-{row['end']}",
     axis='columns',
+)
+
+circles["length"] = circles.agg(
+    # both start and end position are 0-based:
+    # https://github.com/iprada/Circle-Map/wiki/Circle-Map-Realign-output-files
+    lambda row: row['end'] - row['start'] + 1,
+    axis='columns',
+)
+
+circles = circles.loc[
+    ( circles["length"] >= snakemake.params["min_circle_length"] ) &
+    ( circles["length"] <= snakemake.params["max_circle_length"] )
+]
+
+circles.sort_values(
+    by=['chromosome', 'start', 'end'],
+    inplace=True
 )
 
 circles.drop(

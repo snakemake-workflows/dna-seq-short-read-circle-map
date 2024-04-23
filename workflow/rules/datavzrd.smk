@@ -25,4 +25,4 @@ rule datavzrd:
     log:
         "logs/datavzrd/circles/{sample}.log",
     wrapper:
-        "v1.21.2/utils/datavzrd"
+        "v3.8.0/utils/datavzrd"
