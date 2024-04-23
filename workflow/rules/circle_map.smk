@@ -67,7 +67,9 @@ rule clean_circle_map_realign_output:
     params:
         min_circle_score=config["circle_filtering"]["min_circle_score"],
         min_split_reads=config["circle_filtering"]["min_split_reads"],
-        min_discordant_read_pairs=config["circle_filtering"]["min_discordant_read_pairs"],
+        min_discordant_read_pairs=config["circle_filtering"][
+            "min_discordant_read_pairs"
+        ],
         max_uncovered_fraction=config["circle_filtering"]["max_uncovered_fraction"],
         min_mean_coverage=config["circle_filtering"]["min_mean_coverage"],
         min_circle_length=config["circle_filtering"]["min_circle_length"],
