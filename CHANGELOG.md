@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://www.github.com/snakemake-workflows/dna-seq-short-read-circle-map/compare/v1.2.4...v1.3.0) (2024-04-23)
+
+
+### Features
+
+* introduce configurable results filtering, improve color scale ([#20](https://www.github.com/snakemake-workflows/dna-seq-short-read-circle-map/issues/20)) ([5f45fa6](https://www.github.com/snakemake-workflows/dna-seq-short-read-circle-map/commit/5f45fa6589eefcca8291f90892e7c61dad0ddcf6))
+
 ### [1.2.4](https://www.github.com/snakemake-workflows/dna-seq-short-read-circle-map/compare/v1.2.3...v1.2.4) (2024-04-04)
 
 
