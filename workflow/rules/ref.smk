@@ -99,3 +99,18 @@ rule tabix_known_variants:
         "-p vcf",
     wrapper:
         "v1.21.2/bio/tabix/index"
+
+rule annotation_gff_from_biomart:
+    output:
+        gff="resources/custom_annotation_features.gff3",
+    log:
+        "logs/annotation_gff_from_biomart.log",
+    conda:
+        annotate_circles_env,
+    cache: "omit-software"
+    params:
+        species=bioc_species_name,
+        release=config["ref"]["release"],
+        build=config["ref"]["build"],
+    script:
+        "../scripts/annotation_gff_from_biomart.R"
