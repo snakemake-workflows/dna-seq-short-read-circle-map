@@ -100,17 +100,47 @@ rule tabix_known_variants:
     wrapper:
         "v1.21.2/bio/tabix/index"
 
-rule annotation_gff_from_biomart:
+
+rule get_annotation:
     output:
-        gff="resources/custom_annotation_features.gff3",
-    log:
-        "logs/annotation_gff_from_biomart.log",
-    conda:
-        annotate_circles_env,
-    cache: "omit-software"
+        "resources/genomic_annotations.gff3.gz",
     params:
-        species=bioc_species_name,
+        species=config["ref"]["species"],
         release=config["ref"]["release"],
         build=config["ref"]["build"],
+    log:
+        "logs/get-annotation.log",
+    cache: "omit-software"
+    localrule: True
+    wrapper:
+        "v3.13.0/bio/reference/ensembl-annotation"
+
+
+rule get_regulatory_features_gff3_gz:
+    output:
+        "resources/regulatory_annotations.gff3.gz",  # presence of .gz determines if downloaded is kept compressed
+    params:
+        species=config["ref"]["species"],
+        release=config["ref"]["release"],
+        build=config["ref"]["build"],
+    log:
+        "logs/get_regulatory_features.log",
+    cache: "omit-software"  # save space and time with between workflow caching (see docs)
+    wrapper:
+        "v3.13.0/bio/reference/ensembl-regulation"
+
+rule create_annotation_gff:
+    input:
+        genomic_annotations="resources/genomic_annotations.gff3.gz",
+        regulatory_annotations="resources/regulatory_annotations.gff3.gz",
+    output:
+        all_annotations="resources/all_annotations.harmonized.gff3.gz",
+    log:
+        "logs/all_annotations.harmonized.gff3.log"
+    conda:
+        "../envs/rtracklayer.yaml"
+    params:
+        build=config["ref"]["build"],
     script:
-        "../scripts/annotation_gff_from_biomart.R"
+        "../scripts/create_annotation_gff3.R"
+    
