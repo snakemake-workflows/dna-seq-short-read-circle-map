@@ -8,11 +8,14 @@ rlang::global_entrace()
 library("GenomicRanges")
 library("rtracklayer")
 
+transcripts_to_genes_mappings <- read_tsv(
+  snakemake@input[["mappping"]]
+)
+
 genome_build <- snakemake@params[["build"]]
 
 genomic_annotations <- rtracklayer::import(
   snakemake@input[["genomic_annotations"]],
-  which = circles_gr, #import only intervals overlapping circles
   genome = genome_build,
   feature.type = c(
     "five_prime_UTR",
@@ -56,19 +59,10 @@ genomic_annotations <- rtracklayer::import(
     delim = ":",
     names = c("parent_type", "parent_id")
   ) |>
-  mutate(
-    id = case_when(
-      !is.na(id) ~ id,
-      type == "exon" ~ Name,
-      type %in% c("five_prime_UTR", "three_prime_UTR") ~ parent_id
-    )
-  ) |>
-  dplyr::rename(name = Name) |>
-  GRanges()
+  dplyr::rename(name = Name)
 
 regulatory_annotations <- rtracklayer::import(
   snakemake@input[["regulatory_annotations"]],
-  which = circles_gr, #import only intervals overlapping circles
   genome = genome_build,
   # make sure to expand parent_type generation below, if you add
   # further types right here
@@ -116,16 +110,86 @@ regulatory_annotations <- rtracklayer::import(
     parent_id = gene_id,
   ) |>
   mutate(
-    parent_type = if_else(
-      (!is.na(parent_id) & str_detect(parent_id, "^ENSG")),
-      "gene",
-      NA
-    ),
     rank = NA
+  )
+
+
+transcript_id_to_gene_id_mapping <- transcripts_to_genes_mappings |>
+  dplyr::select(
+    c(
+      ensembl_transcript_id,
+      ensembl_gene_id
+    )
+  ) |>
+  distinct()
+
+gene_id_annotations <- transcripts_to_genes_mappings |>
+  dplyr::select(
+    -ensembl_transcript_id
+  ) |>
+  distinct() |>
+  dplyr::rename(
+    hgnc_symbol = external_gene_name,
+    genecards_id = genecards
+  )
+
+all_annotations <- bind_rows(
+    genomic_annotations,
+    regulatory_annotations
+  ) |>
+  mutate(
+    ensembl_transcript_id = case_when(
+      str_detect(parent_id, "^ENST") ~ parent_id,
+      str_detect(id, "^ENST") ~ id
+    ),
+    gene_id = case_when(
+      str_detect(parent_id, "^ENSG") ~ parent_id,
+      str_detect(id, "^ENSG") ~ id,
+    )
+  ) |>
+  dplyr::select(
+    -c(
+      parent_type,
+      parent_id,
+      phase
+    )
+  ) |>
+  left_join(
+    transcript_id_to_gene_id_mapping,
+    by = join_by(
+      ensembl_transcript_id
+    )
+  ) |>
+  mutate(
+    ensembl_gene_id =  if_else(
+      is.na(ensembl_gene_id),
+      gene_id,
+      ensembl_gene_id
+    )
+  ) |>
+  dplyr::select(
+    -gene_id
+  ) |>
+  # bring in the gene symbols
+  left_join(
+    gene_id_annotations,
+    by = join_by(
+      ensembl_gene_id
+    )
+  ) |>
+  # make sure, everything has an `id`
+  mutate(
+    id = case_when(
+      is.na(id) & str_detect(name, "^ENS") ~ name,
+      is.na(id) & str_detect(type, "_UTR$") ~ ensembl_transcript_id,
+      .default = id
+    )
+  ) |>
+  dplyr::rename(
+    ensemble_id = id
   ) |>
   GRanges()
 
-all_annotations <- c(genomic_annotations, regulatory_annotations)
 seqlevels(all_annotations) <- sort(seqlevels(all_annotations))
 all_annotations <- sort(all_annotations, ignore.strand = TRUE)
 

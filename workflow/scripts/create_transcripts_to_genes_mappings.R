@@ -6,12 +6,12 @@ library("tidyverse")
 rlang::global_entrace()
 library("cli")
 
-library("rtracklayer")
 library("biomaRt")
 
 wanted_species <- snakemake@params[["species"]]
 wanted_release <- snakemake@params[["release"]]
 wanted_build <- snakemake@params[["build"]]
+wanted_chromosome <- snakemake@params[["chromosome"]]
 
 if (wanted_build == "GRCh37") {
   grch <- "37"
@@ -65,33 +65,29 @@ get_mart <- function(species, build, version, grch, dataset) {
 # 3. structure:
 #   * currently none interesting, but possibly relevant
 gene_ensembl <- get_mart(wanted_species, wanted_build, version, grch, "gene_ensembl")
-annotations <- getBM(
-  attributes = c("chromosome_start", "feature_type_name"),
-  filters = c('feature_type_name', 'chromosome_name'),
-  values = c(c("5utr", "3utr", "upstream_flank", "ensembl_gene_id_version", "ensembl_transcript_id_version" ), c("22")),
-  mart = gene_ensembl
+
+wanted_attributes <- c(
+  "ensembl_transcript_id",
+  "ensembl_gene_id",
+  "external_gene_name",
+  "genecards"
 )
 
-# <species>_regulatory_feature dataset provides the following `feature_type_name`s:
-# * Enhancer         
-# * CTCF Binding Site
-# * TF binding       
-# * Open chromatin   
-# * Promoter
-regulatory_features <- get_mart(wanted_species, wanted_build, version, grch, "regulatory_feature")
+if (wanted_chromosome != "") {
+  mapping <- getBM(
+    attributes = wanted_attributes,
+    filters = 'chromosome_name',
+    values = wanted_chromosome,
+    mart = gene_ensembl
+  ) |> as_tibble()
+} else {
+  mapping <- getBM(
+    attributes = wanted_attributes,
+    mart = gene_ensembl
+  ) |> as_tibble()
+}
 
-#  # <species>_external_feature dataset provides the following feature_type: feature_type_class:
-#  # 1. VISTA Enhancers: Enhancer
-#  # 2. FANTOM predictions: Enhancer
-#  # 3. FANTOM predictions: Transcription Star Site
-#  # We should probably get the following fields for useful annotation:
-#  # * chromosome_name
-#  # * chromosome_start
-#  # * chromosome_enc
-#  # * feature_type
-#  # * feature_type_class
-#  # * db_display_name (check if dprimary_acc contains this info)
-#  # * dbprimary_acc
-#  external_features <- get mart(wanted_species, wanted_build, wanted_version, grch, "external_feature") {
-
-
+write_tsv(
+  mapping,
+  file = snakemake@output[["mapping"]]
+)

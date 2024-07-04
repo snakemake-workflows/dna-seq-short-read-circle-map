@@ -129,9 +129,28 @@ rule get_regulatory_features_gff3_gz:
     wrapper:
         "v3.13.0/bio/reference/ensembl-regulation"
 
+
+rule create_transcripts_to_genes_mappings:
+    output:
+        mapping="resources/transcripts_to_genes_mappings.tsv.gz",
+    params:
+        species=get_bioc_species_name,
+        release=config["ref"]["release"],
+        build=config["ref"]["build"],
+        chromosome=config["ref"].get("chromosome", ""),
+    log:
+        "logs/transcripts_to_genes_mappings.log",
+    conda:
+        "../envs/biomart.yaml"
+    cache: "omit-software"  # save space and time with between workflow caching (see docs)
+    script:
+        "../scripts/create_transcripts_to_genes_mappings.R"
+
+
 rule create_annotation_gff:
     input:
         genomic_annotations="resources/genomic_annotations.gff3.gz",
+        mapping="resources/transcripts_to_genes_mappings.tsv.gz",
         regulatory_annotations="resources/regulatory_annotations.gff3.gz",
     output:
         all_annotations="resources/all_annotations.harmonized.gff3.gz",
@@ -143,4 +162,3 @@ rule create_annotation_gff:
         build=config["ref"]["build"],
     script:
         "../scripts/create_annotation_gff3.R"
-    
