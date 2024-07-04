@@ -84,8 +84,8 @@ def get_adapters(wildcards):
 
 
 def get_bioc_species_name():
-    first_letter = config["resources"]["ref"]["species"][0]
-    subspecies = config["resources"]["ref"]["species"].split("_")[1]
+    first_letter = config["ref"]["species"][0]
+    subspecies = config["ref"]["species"].split("_")[1]
     return first_letter + subspecies
 
 

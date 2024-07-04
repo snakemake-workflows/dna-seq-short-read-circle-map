@@ -134,7 +134,7 @@ rule create_transcripts_to_genes_mappings:
     output:
         mapping="resources/transcripts_to_genes_mappings.tsv.gz",
     params:
-        species=get_bioc_species_name,
+        species=get_bioc_species_name(),
         release=config["ref"]["release"],
         build=config["ref"]["build"],
         chromosome=config["ref"].get("chromosome", ""),
