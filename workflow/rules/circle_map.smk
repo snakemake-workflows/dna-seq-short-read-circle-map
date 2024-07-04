@@ -83,12 +83,14 @@ rule annotate_cleaned_circles:
         all_annotations="resources/all_annotations.harmonized.gff3.gz",
         tsv="results/circle-map/{sample}.circles.cleaned.tsv",
     output:
-        tsv="results/circle-map/{sample}.circles.cleaned.annotated.tsv",
+        tsvs=directory(
+            "results/circle-map/{sample}.circles.cleaned.annotated/"
+        ),
     log:
         "logs/circle-map/{sample}.circles.cleaned.annotated.logs",
     conda:
-        annotate_circles_env
+        "../envs/annotatr.yaml"
     params:
-        build=config["resources"]["ref"]["build"],
+        build=config["ref"]["build"],
     script:
         "../scripts/annotate_cleaned_circles.R"

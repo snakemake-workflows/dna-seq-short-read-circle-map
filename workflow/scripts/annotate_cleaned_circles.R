@@ -16,16 +16,7 @@ genome_build <- snakemake@params[["build"]]
 
 circles_gr <- GRanges(
   seqnames = pull(circles, region),
-  ecDNA_status = "ecDNA",
-  length = pull(circles, length),
-  circle_score = pull(circles, circle_score),
-  discordant_reads = pull(circles, discordant_reads),
-  split_reads = pull(circles, split_reads),
-  mean_coverage = pull(circles, mean_coverage),
-  standard_deviation_coverage = pull(circles, standard_deviation_coverage),
-  cov_increase_at_start = pull(circles, cov_increase_at_start),
-  cov_increase_at_end = pull(circles, cov_increase_at_end),
-  uncovered_fraction = pull(circles, uncovered_fraction)
+  ecDNA_status = "ecDNA"
 )
 
 genome(circles_gr) <- genome_build
@@ -45,22 +36,51 @@ annotated_circles <- annotate_regions(
   as_tibble() |>
   dplyr::select(
     -c(
-      phase,
-      strand
+      strand,
+      width,
+      ecDNA_status,
+      annot.width,
+      annot.source,
+      annot.score,
+      annot.phase
     )
   ) |>
-  dplyr::rename(
-    chromosome = seqnames,
-    exon_rank = rank
+  arrange(
+    annot.seqnames,
+    annot.start,
+    annot.end
   ) |>
   mutate(
-    region = str_c(
-      chromosome,
+    circle_region = str_c(
+      seqnames,
       ":",
       start,
       "-",
       end
+    ),
+    region = str_c(
+      annot.seqnames,
+      ":",
+      annot.start,
+      "-",
+      annot.end
     )
+  ) |>
+  dplyr::select(
+    -c(
+      seqnames,
+      start,
+      end,
+      annot.seqnames,
+      annot.start,
+      annot.end
+    )
+  ) |>
+  dplyr::rename(
+    exon_rank = annot.rank
+  ) |>
+  dplyr::rename_with(
+    ~ str_replace(.x, fixed("annot."), "")
   ) |>
   dplyr::select(
     region,
@@ -69,8 +89,20 @@ annotated_circles <- annotate_regions(
     name,
     parent_type,
     parent_id,
-    rank,
-    chromosome,
-    start,
-    end
+    exon_rank,
+    circle_region,
+  ) |>
+  group_by(
+    circle_region
+  ) |>
+  group_walk(
+    ~ write_tsv(
+      .x,
+      file = file.path(
+        str_c(
+          str_replace_all(.y$circle_region, "[:-]", "_"),
+          ".tsv"
+        )
+      )
+    )
   )

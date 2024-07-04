@@ -89,28 +89,6 @@ def get_bioc_species_name():
     return first_letter + subspecies
 
 
-def get_bioc_species_pkg():
-    """Get the package bioconductor package name for the the species in config.yaml"""
-    species_letters = get_bioc_species_name()[0:2].capitalize()
-    return "org.{species}.eg.db".format(species=species_letters)
-
-
-def render_annotation_env():
-    species_pkg = f"bioconductor-{get_bioc_species_pkg()}"
-    with open(workflow.source_path("../envs/annotation_gff_from_biomart.yaml")) as f:
-        env = yaml.load(f, Loader=yaml.SafeLoader)
-    env["dependencies"].append(species_pkg)
-    env_path = Path("resources/envs/annotation_gff_from_biomart.yaml")
-    env_path.parent.mkdir(parents=True, exist_ok=True)
-    with open(env_path, "w") as f:
-        yaml.dump(env, f)
-    return env_path.absolute()
-
-
-bioc_species_name = get_bioc_species_name()
-annotate_circles_env = render_annotate_circles_env()
-
-
 def get_bwa_extra(wildcards):
     """
     Denote sample name and platform in read group.
