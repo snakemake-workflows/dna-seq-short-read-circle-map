@@ -9,7 +9,7 @@ library("GenomicRanges")
 library("rtracklayer")
 
 transcripts_to_genes_mappings <- read_tsv(
-  snakemake@input[["mappping"]]
+  snakemake@input[["mapping"]]
 )
 
 genome_build <- snakemake@params[["build"]]
