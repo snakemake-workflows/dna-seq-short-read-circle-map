@@ -113,7 +113,7 @@ rule get_annotation:
     cache: "omit-software"
     localrule: True
     wrapper:
-        "v3.13.0/bio/reference/ensembl-annotation"
+        "v3.13.6/bio/reference/ensembl-annotation"
 
 
 rule get_regulatory_features_gff3_gz:
@@ -127,7 +127,7 @@ rule get_regulatory_features_gff3_gz:
         "logs/get_regulatory_features.log",
     cache: "omit-software"  # save space and time with between workflow caching (see docs)
     wrapper:
-        "v3.13.0/bio/reference/ensembl-regulation"
+        "v3.13.6/bio/reference/ensembl-regulation"
 
 
 rule create_transcripts_to_genes_mappings:
