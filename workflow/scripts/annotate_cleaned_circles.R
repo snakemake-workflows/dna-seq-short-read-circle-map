@@ -84,11 +84,14 @@ annotated_circles <- annotate_regions(
   ) |>
   dplyr::select(
     region,
+    strand,
     type,
-    id,
+    ensembl_id,
     name,
-    parent_type,
-    parent_id,
+    ensembl_transcript_id,
+    ensembl_gene_id,
+    hgnc_symbol,
+    genecards_id,
     exon_rank,
     circle_region,
   ) |>
