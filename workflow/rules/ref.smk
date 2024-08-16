@@ -160,5 +160,7 @@ rule create_annotation_gff:
         "../envs/rtracklayer.yaml"
     params:
         build=config["ref"]["build"],
+    resources:
+        mem_mb=lambda wc, input: 100 * input.size_mb
     script:
         "../scripts/create_annotation_gff3.R"
