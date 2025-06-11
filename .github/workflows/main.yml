@@ -11,7 +11,7 @@ jobs:
   Formatting:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Formatting
         uses: github/super-linter@v4
         env:
@@ -23,9 +23,9 @@ jobs:
   Linting:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - name: Lint workflow
-      uses: snakemake/snakemake-github-action@v1.24.0
+      uses: snakemake/snakemake-github-action@v2
       with:
         directory: .
         snakefile: workflow/Snakefile
@@ -37,17 +37,17 @@ jobs:
       - Linting
       - Formatting
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
 
     - name: Test workflow
-      uses: snakemake/snakemake-github-action@v1.24.0
+      uses: snakemake/snakemake-github-action@v2
       with:
         directory: .test
         snakefile: .test/Snakefile
         args: "--use-conda --show-failed-logs --cores 3 --conda-cleanup-pkgs cache"
 
     - name: Test report
-      uses: snakemake/snakemake-github-action@v1.24.0
+      uses: snakemake/snakemake-github-action@v2
       with:
         directory: .test
         snakefile: .test/Snakefile
