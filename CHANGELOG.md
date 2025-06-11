@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.3.1](https://www.github.com/snakemake-workflows/dna-seq-short-read-circle-map/compare/v1.3.0...v1.3.1) (2025-06-11)
+
+
+### Performance Improvements
+
+* map circle_map_realign more parallelized, try mem_mb dependent on thread number ([#22](https://www.github.com/snakemake-workflows/dna-seq-short-read-circle-map/issues/22)) ([545be19](https://www.github.com/snakemake-workflows/dna-seq-short-read-circle-map/commit/545be1944340cf76cb2764a97e6ee24d905f5321))
+
 ## [1.3.0](https://www.github.com/snakemake-workflows/dna-seq-short-read-circle-map/compare/v1.2.4...v1.3.0) (2024-04-23)
 
 
