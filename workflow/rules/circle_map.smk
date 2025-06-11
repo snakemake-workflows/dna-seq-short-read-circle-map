@@ -41,9 +41,9 @@ rule circle_map_realign:
         "logs/circle-map/{sample}.circles.log",
     conda:
         "../envs/circle_map.yaml"
-    threads: 4
+    threads: 16
     resources:
-        mem_mb=lambda wc, input: input.size_mb * 2.5,
+        mem_mb=lambda wc, threads: threads * 5000,
     shell:
         "Circle-Map Realign "
         " -i {input.candidates_bam} "
