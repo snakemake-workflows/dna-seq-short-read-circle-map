@@ -155,7 +155,7 @@ rule create_annotation_gff:
     output:
         all_annotations="resources/all_annotations.harmonized.gff3.gz",
     log:
-        "logs/all_annotations.harmonized.gff3.log"
+        "logs/all_annotations.harmonized.gff3.log",
     conda:
         "../envs/rtracklayer.yaml"
     params:
