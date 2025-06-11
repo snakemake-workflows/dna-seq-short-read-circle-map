@@ -10,6 +10,7 @@ rule get_genome:
         release=config["ref"]["release"],
         chromosome=config["ref"].get("chromosome"),
     cache: "omit-software"
+    localrule: True
     wrapper:
         "v1.21.2/bio/reference/ensembl-sequence"
 
@@ -69,6 +70,7 @@ rule get_known_variants:
         type="all",
         chromosome=config["ref"].get("chromosome"),
     cache: "omit-software"
+    localrule: True
     wrapper:
         "v1.21.2/bio/reference/ensembl-variation"
 
@@ -126,6 +128,7 @@ rule get_regulatory_features_gff3_gz:
     log:
         "logs/get_regulatory_features.log",
     cache: "omit-software"  # save space and time with between workflow caching (see docs)
+    localrule: True
     wrapper:
         "v3.13.6/bio/reference/ensembl-regulation"
 
