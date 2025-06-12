@@ -76,3 +76,19 @@ rule clean_circle_map_realign_output:
         max_circle_length=config["circle_filtering"]["max_circle_length"],
     script:
         "../scripts/clean_circle_map_realign_output.py"
+
+
+rule annotate_cleaned_circles:
+    input:
+        all_annotations="resources/ensembl_all_annotations.harmonized.gff3.gz",
+        tsv="results/circle-map/{sample}.circles.cleaned.tsv",
+    output:
+        tsvs=directory("results/circle-map/{sample}.circles.cleaned.annotated/"),
+    log:
+        "logs/circle-map/{sample}.circles.cleaned.annotated.logs",
+    conda:
+        "../envs/annotatr.yaml"
+    params:
+        build=config["ref"]["build"],
+    script:
+        "../scripts/annotate_cleaned_circles.R"

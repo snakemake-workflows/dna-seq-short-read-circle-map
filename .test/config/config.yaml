@@ -9,13 +9,13 @@ ref:
   # Ensembl species name
   species: homo_sapiens
   # Ensembl release
-  release: 108
+  release: 113
   # Genome build
   build: GRCh38
   # Optionally, instead of downloading the whole reference from Ensembl via the 
   # parameters above, specify a specific chromosome below and uncomment the line.
   # This is usually only relevant for testing.
-  chromosome: 7
+  #chromosome: 7
 
 # These filters mostly correspond to the output columns of Circle-Map:
 # https://github.com/iprada/Circle-Map/wiki/Circle-Map-Realign-output-files
