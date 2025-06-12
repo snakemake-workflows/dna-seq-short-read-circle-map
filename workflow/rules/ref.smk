@@ -133,21 +133,56 @@ rule get_regulatory_features_gff3_gz:
         "v3.13.6/bio/reference/ensembl-regulation"
 
 
-rule create_transcripts_to_genes_mappings:
+rule get_repeat_features_tsv_gz:
     output:
-        mapping="resources/transcripts_to_genes_mappings.tsv.gz",
+        table="resources/ensembl_repeat_annotations.tsv.gz",  # .gz extension is optional, but recommended
     params:
-        species=get_bioc_species_name(),
+        species=config["ref"]["species"],
         release=config["ref"]["release"],
         build=config["ref"]["build"],
-        chromosome=config["ref"].get("chromosome", ""),
+        main_tables={
+            "repeat_feature": {
+                "database": "core",
+            },
+        },  # choose the main table to retrieve, specifying { table : database }
+        join_tables={
+            "seq_region": {
+                "database": "core",
+                "join_column": "seq_region_id",
+            },
+            "repeat_consensus": {
+                "database": "core",
+                "join_column": "repeat_consensus_id",
+            },
+        },
+        # optional: add tables to join in for further annotations, specifying { table : { "database": database, "join_column": join-column } }
     log:
-        "logs/transcripts_to_genes_mappings.log",
-    conda:
-        "../envs/biomart.yaml"
+        "logs/create_repeat_annotations.log",
     cache: "omit-software"  # save space and time with between workflow caching (see docs)
-    script:
-        "../scripts/create_transcripts_to_genes_mappings.R"
+    wrapper:
+        "v4.0.0/bio/reference/ensembl-mysql-table"
+
+
+rule create_transcripts_to_genes_mapping:
+    output:
+        table="resources/ensembl_transcripts_to_genes_mapping.tsv.gz",  # .gz extension is optional, but recommended
+    params:
+        biomart="genes",
+        species=config["ref"]["species"],
+        release=config["ref"]["release"],
+        build=config["ref"]["build"],
+        attributes=[
+            "ensembl_transcript_id",
+            "ensembl_gene_id",
+            "external_gene_name",
+            "genecards",
+        ],
+        #filters={ "chromosome_name": ["22", "X"] }, # optional: restrict output by using filters
+    log:
+        "logs/create_transcripts_to_genes_mapping.log",
+    cache: "omit-software"  # save space and time with between workflow caching (see docs)
+    wrapper:
+        "v4.0.0/bio/reference/ensembl-biomart-table"
 
 
 rule create_annotation_gff:
