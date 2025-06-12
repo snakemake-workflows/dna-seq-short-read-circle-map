@@ -13,7 +13,8 @@ rule render_datavzrd_config:
 rule datavzrd:
     input:
         config="resources/datavzrd/circle-map/{sample}.circles.yaml",
-        circles="results/circle-map/{sample}.circles.cleaned.tsv",
+        circles_overview="results/circle-map/{sample}.circles.cleaned.tsv",
+        circles_tables="results/circle-map/{sample}.circles.cleaned.annotated/"
     output:
         report(
             directory("results/datavzrd/circles/{sample}"),
