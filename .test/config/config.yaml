@@ -9,7 +9,7 @@ ref:
   # Ensembl species name
   species: homo_sapiens
   # Ensembl release
-  release: 112
+  release: 113
   # Genome build
   build: GRCh38
   # Optionally, instead of downloading the whole reference from Ensembl via the 
