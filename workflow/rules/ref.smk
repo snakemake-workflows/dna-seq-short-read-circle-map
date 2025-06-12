@@ -144,7 +144,8 @@ rule get_repeat_features_tsv_gz:
             "repeat_feature": {
                 "database": "core",
             },
-        },  # choose the main table to retrieve, specifying { table : database }
+        },
+        # choose the main table to retrieve, specifying { table : database }
         join_tables={
             "seq_region": {
                 "database": "core",
@@ -199,6 +200,6 @@ rule create_annotation_gff:
     params:
         build=config["ref"]["build"],
     resources:
-        mem_mb=lambda wc, input: 100 * input.size_mb
+        mem_mb=lambda wc, input: 100 * input.size_mb,
     script:
         "../scripts/create_annotation_gff3.R"
