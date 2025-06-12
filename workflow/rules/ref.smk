@@ -105,7 +105,7 @@ rule tabix_known_variants:
 
 rule get_annotation:
     output:
-        "resources/genomic_annotations.gff3.gz",
+        "resources/ensembl_genomic_annotations.gff3.gz",
     params:
         species=config["ref"]["species"],
         release=config["ref"]["release"],
@@ -120,7 +120,7 @@ rule get_annotation:
 
 rule get_regulatory_features_gff3_gz:
     output:
-        "resources/regulatory_annotations.gff3.gz",  # presence of .gz determines if downloaded is kept compressed
+        "resources/ensembl_regulatory_annotations.gff3.gz",  # presence of .gz determines if downloaded is kept compressed
     params:
         species=config["ref"]["species"],
         release=config["ref"]["release"],
@@ -187,11 +187,11 @@ rule create_transcripts_to_genes_mapping:
 
 rule create_annotation_gff:
     input:
-        genomic_annotations="resources/genomic_annotations.gff3.gz",
-        mapping="resources/transcripts_to_genes_mappings.tsv.gz",
-        regulatory_annotations="resources/regulatory_annotations.gff3.gz",
+        genomic_annotations="resources/ensembl_genomic_annotations.gff3.gz",
+        mapping="resources/ensembl_transcripts_to_genes_mapping.tsv.gz",
+        regulatory_annotations="resources/ensembl_regulatory_annotations.gff3.gz",
     output:
-        all_annotations="resources/all_annotations.harmonized.gff3.gz",
+        all_annotations="resources/ensembl_all_annotations.harmonized.gff3.gz",
     log:
         "logs/all_annotations.harmonized.gff3.log",
     conda:

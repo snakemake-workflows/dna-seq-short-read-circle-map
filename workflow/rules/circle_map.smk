@@ -80,7 +80,7 @@ rule clean_circle_map_realign_output:
 
 rule annotate_cleaned_circles:
     input:
-        all_annotations="resources/all_annotations.harmonized.gff3.gz",
+        all_annotations="resources/ensembl_all_annotations.harmonized.gff3.gz",
         tsv="results/circle-map/{sample}.circles.cleaned.tsv",
     output:
         tsvs=directory("results/circle-map/{sample}.circles.cleaned.annotated/"),
