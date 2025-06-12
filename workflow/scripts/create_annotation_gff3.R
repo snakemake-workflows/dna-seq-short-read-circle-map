@@ -186,7 +186,7 @@ all_annotations <- bind_rows(
     )
   ) |>
   dplyr::rename(
-    ensemble_id = id
+    ensembl_id = id
   ) |>
   GRanges()
 

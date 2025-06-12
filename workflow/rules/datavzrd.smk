@@ -1,7 +1,8 @@
 rule datavzrd:
     input:
         config=workflow.source_path("../resources/circles.datavzrd.yaml"),
-        circles="results/circle-map/{sample}.circles.cleaned.tsv",
+        circles_overview="results/circle-map/{sample}.circles.cleaned.tsv",
+        circles_tables="results/circle-map/{sample}.circles.cleaned.annotated/",
     output:
         report(
             directory("results/datavzrd/circles/{sample}"),
