@@ -27,6 +27,11 @@ overlapping_annotations <- rtracklayer::import(
   genome = genome_build
 )
 
+dir.create(
+  snakemake@output[["tsvs"]],
+  recursive = TRUE
+)
+
 annotated_circles <- annotate_regions(
   regions = circles_gr,
   annotations = overlapping_annotations,
@@ -102,6 +107,7 @@ annotated_circles <- annotate_regions(
     ~ write_tsv(
       .x,
       file = file.path(
+        snakemake@output[["tsvs"]],
         str_c(
           str_replace_all(.y$circle_region, "[:-]", "_"),
           ".tsv"
