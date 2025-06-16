@@ -10,7 +10,7 @@ datasets:
     separator: "\t"
 
 views:
-  circle_overview:
+  circles_overview:
     dataset: circles_overview
     page-size: 18
     desc: |
