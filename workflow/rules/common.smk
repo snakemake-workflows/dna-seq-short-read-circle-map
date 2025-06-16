@@ -83,6 +83,12 @@ def get_adapters(wildcards):
     ].get("adapters", ""),
 
 
+def get_bioc_species_name():
+    first_letter = config["ref"]["species"][0]
+    subspecies = config["ref"]["species"].split("_")[1]
+    return first_letter + subspecies
+
+
 def get_bwa_extra(wildcards):
     """
     Denote sample name and platform in read group.

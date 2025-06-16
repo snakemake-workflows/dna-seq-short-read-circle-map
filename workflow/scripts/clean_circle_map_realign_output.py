@@ -33,7 +33,7 @@ int_cols = [
 ]
 
 # turn int cols into int
-circles.loc[:, int_cols] = circles.loc[:, int_cols].round(0).applymap(lambda v: int(v) if not pd.isna(v) else pd.NA)
+circles[int_cols] = circles[int_cols].round(0).map(lambda v: int(v) if not pd.isna(v) else pd.NA)
 
 # filter out low-quality circles, according to:
 # https://github.com/iprada/Circle-Map/wiki/Circle-Map-Realign-output-files
